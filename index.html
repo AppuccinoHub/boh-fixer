@@ -27,7 +27,7 @@ button.on{border-color:#7a3b1d;background:#f1dcc4;font-weight:700}
 <h3>Hair color</h3><div class="row" id="c"></div>
 </div></div>
 <script>
-const HC={natural:'#5a3a26',black:'#262020','dark-brown':'#3e2618','medium-brown':'#68402a','light-brown':'#966842',auburn:'#8c3418','dark-blonde':'#a6804e',blonde:'#d6b06c','bright-red':'#ce281a'};
+const HC={natural:'#5a3a26',black:'#262020','dark-brown':'#3e2618','medium-brown':'#68402a','light-brown':'#966842',auburn:'#8c3418','dark-blonde':'#a6804e',blonde:'#d6b06c','bright-red':'#ce281a','light-brown-with-blonde-highlights':'linear-gradient(90deg,#966842 0 30%,#e8c882 30% 45%,#966842 45% 70%,#e8c882 70% 85%,#966842 85%)','blonde-on-top':'linear-gradient(180deg,#d6b06c 0 50%,#5a3a26 50%)'};
 let D,S={g:'girl',t:5,h:0,c:'natural'};
 const $=i=>document.getElementById(i);
 function btn(p,label,on,f,st){const b=document.createElement('button');b.textContent=label;if(st){b.className='sw';b.style.background=st;b.title=label;b.textContent=''}if(on)b.classList.add('on');b.onclick=f;p.appendChild(b)}
@@ -39,7 +39,7 @@ function draw(){
  ['girl','boy'].forEach(x=>btn($('g'),x,S.g==x,()=>{S.g=x;S.h=0;draw()}));
  D.tones.forEach((rgb,i)=>btn($('t'),'Tone '+(i+1),S.t==i+1,()=>{S.t=i+1;draw()},`rgb(${rgb})`));
  D[g].forEach(([k,lab],i)=>btn($('h'),lab,S.h==i,()=>{S.h=i;draw()}));
- D.colors.forEach(c=>btn($('c'),c.replace('-',' '),S.c==c,()=>{S.c=c;draw()},HC[c]));
+ D.colors.forEach(c=>btn($('c'),c.replaceAll('-',' '),S.c==c,()=>{S.c=c;draw()},HC[c]));
  // preload other colors of this style
  D.colors.forEach(c=>{new Image().src=`img/${g}_hair_${n}_${c}_front.webp`});
 }
